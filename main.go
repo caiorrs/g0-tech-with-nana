@@ -38,7 +38,10 @@ func main() {
 	// bookings[0] = "Nana"
 	// bookings[10] = "Nicole"
 
-	for {
+	// infinite loop
+	// for {} OR for true {}
+
+	for remainingTickets > 0 && len(bookings) < 50 {
 		var firstName string
 		var lastName string
 		var email string
@@ -53,6 +56,11 @@ func main() {
 		fmt.Printf("Enter the number of tickets: ")
 		fmt.Scan(&userTickets)
 
+		// var isValidName = len(firstName) >= 2 && len(lastName) >= 2
+		isValidName := len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail := strings.Contains(email, "@")
+		isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
+
 		// fmt.Println(remainingTickets)
 		// fmt.Println(&remainingTickets)
 
@@ -60,7 +68,7 @@ func main() {
 		// userTickets = 2
 		// fmt.Printf("User %v booked %v tickets\n", firstName, userTickets)
 
-		if userTickets < remainingTickets {
+		if isValidName && isValidEmail && isValidTicketNumber {
 			remainingTickets = remainingTickets - userTickets
 			// bookings[0] = firstName + " " + lastName
 			bookings = append(bookings, firstName+" "+lastName)
@@ -92,11 +100,18 @@ func main() {
 				fmt.Println("Our conference is booked out. Come back next year.")
 				break
 			}
-
-		} else if userTickets == remainingTickets {
-			fmt.Println("You are buing the last tickets available.")
 		} else {
-			fmt.Printf("We only have %v tickets remaining, so you can't book %v tickets\n", remainingTickets, userTickets)
+			if !isValidName {
+				fmt.Println("First name and last name need to have at least 2 characters")
+			}
+			if !isValidEmail {
+				fmt.Println("The email address provided does not contain @ character")
+			}
+			if !isValidTicketNumber {
+				fmt.Println("Number of tickets you entered is invalid")
+			}
+			fmt.Println("Your input data is invalid, try again")
+			// fmt.Printf("We only have %v tickets remaining, so you can't book %v tickets\n", remainingTickets, userTickets)
 			// break
 			// continue
 		}
