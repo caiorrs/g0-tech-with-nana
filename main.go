@@ -115,6 +115,20 @@ func main() {
 			// break
 			// continue
 		}
-
 	}
+
+	// city := "London"
+
+	// switch city {
+	// case "New York":
+	// 	fmt.Println("")
+	// case "Singapore", "Hong Kong":
+	// 	fmt.Println("")
+	// case "London", "Berlin":
+	// 	fmt.Println("")
+	// case "Mexico City":
+	// 	fmt.Println("")
+	// default:
+	// 	fmt.Println("No valid city selected")
+	// }
 }
