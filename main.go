@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+// https://www.youtube.com/watch?v=yyUHQIec83I&list=PLV1lYgSg14YwhmOYcpgJCiPjkvR-AdwRO&index=4
+
 func main() {
 
 	// var conferenceName string = "Go Conference"
@@ -16,7 +18,12 @@ func main() {
 
 	// var bookings = [50]string{"Nana", "Nicole"}
 	// var bookings = [50]string{}
-	var bookings [50]string
+	// Array
+	// var bookings [50]string
+	// Slice -> dynamic list
+	// var bookings []string
+	// var bookings []string{}
+	bookings := []string{}
 
 	// fmt.Printf("conferenceTickets is %T, remaining tickets is %T, conferenceName is %T\n\n", conferenceTickets, remainingTickets, conferenceName)
 
@@ -52,13 +59,16 @@ func main() {
 	// fmt.Printf("User %v booked %v tickets\n", firstName, userTickets)
 
 	remainingTickets = remainingTickets - userTickets
-	bookings[0] = firstName + " " + lastName
+	// bookings[0] = firstName + " " + lastName
+	bookings = append(bookings, firstName+" "+lastName)
 
-	fmt.Printf("The whole array: %v\n", bookings)
-	fmt.Printf("The first value: %v\n", bookings[0])
-	fmt.Printf("Array type: %T\n", bookings)
-	fmt.Printf("Array length: %v\n", len(bookings))
+	// fmt.Printf("The whole slice: %v\n", bookings)
+	// fmt.Printf("The first value: %v\n", bookings[0])
+	// fmt.Printf("Slice type: %T\n", bookings)
+	// fmt.Printf("Slice length: %v\n", len(bookings))
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+
+	fmt.Printf("These are all our bookings: %v\n", bookings)
 }
