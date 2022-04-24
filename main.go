@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strings"
+	"time"
 )
 
 // https://www.youtube.com/watch?v=yyUHQIec83I&list=PLV1lYgSg14YwhmOYcpgJCiPjkvR-AdwRO&index=4
@@ -34,6 +35,9 @@ func main() {
 
 		if isValidName && isValidEmail && isValidTicketNumber {
 			bookTicket(userTickets, firstName, lastName, email)
+
+			// runs on a new thread
+			go sendTicket(userTickets, firstName, lastName, email)
 
 			firstNames := getFirstNames()
 			fmt.Printf("The first names of bookings are: %v\n", firstNames)
@@ -117,7 +121,9 @@ func bookTicket(userTickets uint, firstName string, lastName string, email strin
 	fmt.Printf("List of bookings is %v\n", bookings)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
+	fmt.Println("#### REMAINING ####")
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
+	fmt.Println("#### ######### ####")
 }
 
 func validateUserInput(firstName string, lastName string, email string, userTickets uint, remainingTickets uint) (bool, bool, bool) {
@@ -126,4 +132,15 @@ func validateUserInput(firstName string, lastName string, email string, userTick
 	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
 
 	return isValidName, isValidEmail, isValidTicketNumber
+}
+
+func sendTicket(tickets uint, firstName string, lastName string, email string) {
+
+	time.Sleep(10 * time.Second)
+
+	var ticket = fmt.Sprintf("%v tickets for %v %v", tickets, firstName, lastName)
+
+	fmt.Println("################")
+	fmt.Printf("Sending ticket:\n %v to email address %v\n", ticket, email)
+	fmt.Println("################")
 }
